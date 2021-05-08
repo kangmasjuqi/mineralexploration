@@ -1,10 +1,9 @@
 
-# INSTALLATION
+## INSTALLATION
 
 ### make sure you have composer 
 
-	ll /usr/bin/composer
-
+- ll /usr/bin/composer
 
 - sudo composer -vvv create-project laravel/laravel="8.0.*" mineralexploration
 
@@ -26,32 +25,47 @@
         "laravelcollective/html": "^6.2"
     },
 
-	sudo composer -vvv update
+- sudo composer -vvv update
 
 ### scaffold modules using infyom
 
 - php artisan infyom:api_scaffold Hole
 
-	latitude string text
-	required
-	longitude string text
-	required
-	dip float text
-	required
-	azimuth float text
-	required
+		latitude string text
+
+		required
+
+		longitude string text
+
+		required
+
+		dip float text
+
+		required
+
+		azimuth float text
+
+		required
 
 - php artisan infyom:api_scaffold Reading
 
-	hole_id integer:unsigned:foreign,holes,id - `$table->foreign('hole_id')->references('id')->on('holes')` text
-	required
-	depth float text
-	required
-	dip float text
-	required
-	azimuth float text
-	required
-	is_trustworthy integer text
+		hole_id integer:unsigned:foreign,holes,id - `$table->foreign('hole_id')->references('id')->on('holes')` text
+
+		required
+
+		depth float text
+
+		required
+
+		dip float text
+
+		required
+
+		azimuth float text
+
+		required
+
+		is_trustworthy integer text
 
 ### create your local DB
 
@@ -78,10 +92,13 @@
 ### goto __IP_ADDRESS__:8000/login, i.e.: http://192.168.69.6:8000/login
 
 use below account ;
+
 	username : marjuqi.rahmat@gmail.com
+
 	password : marjuqi123
 
 ### or create your own account, goto __IP_ADDRESS__:8000/register, i.e.: http://192.168.69.6:8000/register
+
 	complete the registration from
 
 ### WEB URL
