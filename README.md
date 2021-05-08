@@ -1,61 +1,95 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+# INSTALLATION
 
-## About Laravel
+### make sure you have composer 
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+	ll /usr/bin/composer
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- sudo composer -vvv create-project laravel/laravel="8.0.*" mineralexploration
 
-## Learning Laravel
+- sudo chown -R marjuqi:marjuqi mineralexploration/
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### update composer.json
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+    "require": {
+        "php": "^7.3",
+        "fideloper/proxy": "^4.2",
+        "fruitcake/laravel-cors": "^2.0",
+        "guzzlehttp/guzzle": "^7.0.1",
+        "laravel/framework": "^8.0",
+        "laravel/tinker": "^2.0",
+        "doctrine/dbal": "~2.3",
+        "infyomlabs/adminlte-templates": "^2.0",
+        "infyomlabs/laravel-generator": "8.0.x-dev",
+        "laravel/ui": "^3.2",
+        "laravelcollective/html": "^6.2"
+    },
 
-## Laravel Sponsors
+	sudo composer -vvv update
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### scaffold modules using infyom
 
-### Premium Partners
+- php artisan infyom:api_scaffold Hole
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+	latitude string text
+	required
+	longitude string text
+	required
+	dip float text
+	required
+	azimuth float text
+	required
 
-## Contributing
+- php artisan infyom:api_scaffold Reading
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+	hole_id integer:unsigned:foreign,holes,id - `$table->foreign('hole_id')->references('id')->on('holes')` text
+	required
+	depth float text
+	required
+	dip float text
+	required
+	azimuth float text
+	required
+	is_trustworthy integer text
 
-## Code of Conduct
+### create your local DB
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### adjust .env file with your local DB config
 
-## Security Vulnerabilities
+- php artisan migrate
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- php artisan ui bootstrap
 
-## License
+- php artisan ui bootstrap --auth
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- npm install
+
+- npm run dev
+
+- php artisan make:factory HoleFactory --model=Hole
+
+- php artisan make:factory ReadingFactory --model=Reading
+
+- php artisan db:seed
+
+- php artisan serve --host=__IP_ADDRESS__
+
+### goto __IP_ADDRESS__:8000/login, i.e.: http://192.168.69.6:8000/login
+
+use below account ;
+	username : marjuqi.rahmat@gmail.com
+	password : marjuqi123
+
+### or create your own account, goto __IP_ADDRESS__:8000/register, i.e.: http://192.168.69.6:8000/register
+	complete the registration from
+
+### WEB URL
+
+	http://__IP_ADDRESS__:8000/home
+
+### API URL 
+
+	http://__IP_ADDRESS__:8000/api/holes
+	http://__IP_ADDRESS__:8000/api/holes/2
+
