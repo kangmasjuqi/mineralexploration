@@ -89,17 +89,15 @@
 
 - php artisan serve --host=__IP_ADDRESS__
 
-### goto __IP_ADDRESS__:8000/login, i.e.: http://192.168.69.6:8000/login
+### account credential 
 
-use below account ;
+goto __IP_ADDRESS__:8000/login, i.e.: http://192.168.69.6:8000/login and use below account ;
 
 	username : marjuqi.rahmat@gmail.com
 
 	password : marjuqi123
 
-### or create your own account, goto __IP_ADDRESS__:8000/register, i.e.: http://192.168.69.6:8000/register
-
-	complete the registration from
+or create your own account, goto __IP_ADDRESS__:8000/register, i.e.: http://192.168.69.6:8000/register and then complete the registration from
 
 ### WEB URL
 
