@@ -28,4 +28,9 @@ class HomeController extends Controller
         
         return view('home', array('all_holes' => $all_holes));
     }
+
+    public function mineral_exploration()
+    {
+        return view('mineral_exploration', array());
+    }
 }

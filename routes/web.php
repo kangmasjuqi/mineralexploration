@@ -24,3 +24,4 @@ Route::resource('readings', App\Http\Controllers\ReadingController::class);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/mineral_exploration', [App\Http\Controllers\HomeController::class, 'mineral_exploration'])->name('mineral_exploration');

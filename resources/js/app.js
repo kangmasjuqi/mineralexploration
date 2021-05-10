@@ -13,9 +13,13 @@ require('./bootstrap');
  */
 
 import ReactDOM from 'react-dom';
-import Example from './components/Example';
+import Index from "./components/Index";
+import HoleIndex from './components/holes/HoleIndex';
+import HoleDetail from './components/holes/HoleDetail';
+import ReadingUpdate from './components/readings/ReadingUpdate';
 
-if (document.getElementById('example')) {
-    ReactDOM.render(<Example />, document.getElementById('example'));
+import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+
+if (document.getElementById('mineralexploration-app')) {
+  ReactDOM.render(<Router><Index /></Router>, document.getElementById('mineralexploration-app'));
 }
-
