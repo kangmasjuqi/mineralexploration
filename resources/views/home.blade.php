@@ -61,6 +61,8 @@
                         </tbody>
                     </table>
 
+					<div id="example"></div>
+
                 </div>
             </div>
         </div>
