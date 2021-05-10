@@ -27,6 +27,12 @@
 
 - sudo composer -vvv update
 
+### npm stuffs
+
+- npm install
+
+- npm run dev
+
 ### scaffold modules using infyom
 
 - php artisan infyom:api_scaffold Hole
@@ -77,9 +83,7 @@
 
 - php artisan ui bootstrap --auth
 
-- npm install
-
-- npm run dev
+- php artisan ui react
 
 - php artisan make:factory HoleFactory --model=Hole
 
@@ -107,4 +111,6 @@ or create your own account, goto __IP_ADDRESS__:8000/register, i.e.: http://192.
 
 	http://__IP_ADDRESS__:8000/api/holes
 	http://__IP_ADDRESS__:8000/api/holes/2
+
+==========================================================
 
