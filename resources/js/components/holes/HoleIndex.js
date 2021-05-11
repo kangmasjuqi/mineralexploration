@@ -5,6 +5,7 @@ import { Link, Route, Switch } from "react-router-dom";
 import Config from '../Config.js';
 import Alert from '../Alert.js';
 import HoleDetail from './HoleDetail';
+import ReadingUpdate from '../readings/ReadingUpdate';
 
 export default class HoleIndex extends Component {
 
@@ -67,6 +68,7 @@ export default class HoleIndex extends Component {
 
                 <Switch>
                     <Route exact path="/mineral_exploration/holes/:holeId" component={HoleDetail} />
+					<Route exact path="/mineral_exploration/readings/update/:readingId" component={ReadingUpdate} />
                 </Switch>
             </div>
         );

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, seState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import { Link } from "react-router-dom";
@@ -10,39 +10,60 @@ export default class ReadingUpdate extends Component {
     constructor(props)
     {
         super(props);
-        this.onChangeCategoryName = this.onChangeCategoryName.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
+
+        this.updateReading = this.updateReading.bind(this);
         
         this.state={
-            category_name:'',
+			reading_id: 0, 
+			reading_hole_id: 0, 
+			reading_depth: 0, 
+			reading_dip: 0, 
+			reading_azimuth: 0, 
+			reading_is_trustworthy: 0, 
             alert_message:''
         }
     }
 
     componentDidMount()
     {
-        axios.get(Config.getUrl()+"/category/edit/"+this.props.match.params.id)
+		var readingId = 11 // this.props.match.params.id
+		axios.get(Config.getUrl()+"/readings/" + readingId)
         .then(response=>{
-            this.setState({category_name:response.data.name});
+            this.setState({
+				reading_id: response.data.data.id,
+				reading_hole_id: response.data.data.hole_id,
+				reading_depth: response.data.data.depth,
+				reading_dip: response.data.data.dip,
+				reading_azimuth: response.data.data.azimuth,
+				reading_is_trustworthy : response.data.data.is_trustworthy,
+			});
+			console.log(this.state.reading)
         });
     }
 
-    onChangeCategoryName(e)
-    {
-        this.setState({category_name:e.target.value});
-    }
-    onSubmit(e)
+    updateReading(e)
     {
         e.preventDefault();
-        const category ={
-            category_name: this.state.category_name
+		
+		var reading_id = this.state.reading_id
+		var hole_id = this.state.reading_hole_id
+		
+        const updated_reading ={
+            hole_id: hole_id,
+            depth: this.state.reading_depth,
+            dip: this.state.reading_dip,
+            azimuth: this.state.reading_azimuth,
         }
-        axios.put(Config.getUrl()+"/category/update/"+this.props.match.params.id, category)
-        .then(res=>{
-            this.setState({alert_message:'success'});
-        }).catch(error=>{
-            this.setState({alert_message:'error'});
-        });
+		console.log(this.state)
+		console.log(updated_reading)
+        // axios.patch(Config.getUrl()+"/readings/"+reading_id, updated_reading)
+        // .then(res=>{
+			// console.log(res)
+            // this.setState({alert_message:'success'});
+        // }).catch(error=>{
+			// console.log(error)
+            // this.setState({alert_message:'error'});
+        // });
     }
 
 
@@ -50,22 +71,47 @@ export default class ReadingUpdate extends Component {
         return (
             <div>
                 <hr />
-                {this.state.alert_message=="success"?<SuccessAlert type="success" msg="Data updated successfully!" />:null}
-                {this.state.alert_message=="error"?<SuccessAlert type="warning" msg="Error occured" />:null}
+				
+                {this.state.alert_message=="success"?<Alert type="success" msg="Data updated successfully!" />:null}
+                {this.state.alert_message=="error"?<Alert type="warning" msg="Error occured" />:null}
 
-                <form onSubmit={this.onSubmit}>
-                    <div className="mb-3">
-                        <label htmlFor="category_name" className="form-label">Category Name</label>
-                        <input type="text" 
-                        className="form-control" 
-                        id="category_name" 
-                        value={this.state.category_name}
-                        onChange={this.onChangeCategoryName}
-                        placeholder="Enter category" />
-                    </div>
+				<form onSubmit={this.updateReading}>
 
-                    <button type="submit" className="btn btn-primary">Submit</button>
-                </form>
+					<div style={{width : '100px', float : 'left', marginLeft : '20px'}}>
+						<label>Depth</label>
+						<input className="form-control" type="text" 
+							id="field_reading_depth" 
+							value={this.state.reading_depth}
+							onChange={(e) => 
+								this.setState({ reading_depth: e.target.value })
+							}/>
+					</div>
+
+					<div style={{width : '100px', float : 'left', marginLeft : '20px'}}>
+						<label>Dip</label>
+						<input className="form-control" type="text" 
+							id="field_reading_dip" 
+							value={this.state.reading_dip}
+							onChange={(e) => 
+								this.setState({ reading_dip: e.target.value })
+							}/>
+					</div>
+
+					<div style={{width : '100px', float : 'left', marginLeft : '20px'}}>
+						<label>Azimuth</label>
+						<input className="form-control" type="text" 
+							id="field_reading_azimuth" 
+							value={this.state.reading_azimuth}
+							onChange={(e) => 
+								this.setState({ reading_azimuth: e.target.value })
+							}/>
+					</div>
+
+					<div style={{width : '100px', float : 'left', marginLeft : '20px'}}>
+						<button style={{marginTop: '30px'}} type="submit" className="btn btn-primary">Submit</button>
+					</div>
+
+				</form>
             </div>
         );
     }

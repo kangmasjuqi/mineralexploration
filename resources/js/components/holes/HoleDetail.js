@@ -19,11 +19,7 @@ export default class HoleDetail extends Component {
 				dip: '', 
 				azimuth: '', 
 				readings : []
-			},
-			field_reading_depth:0,
-			field_reading_dip:0,
-			field_reading_azimuth:0,
-            alert_message:''
+			}
         }
     }
 
@@ -56,66 +52,42 @@ export default class HoleDetail extends Component {
 					<p>Azimuth : {this.state.hole.azimuth}</p>
                 </div>
 				<div>
-					<table className="table table-border">
-					<thead>
-						<tr>
-							<th scope="col">Depth</th>
-							<th scope="col">Dip</th>
-							<th scope="col">Azimuth</th>
-							<th scope="col">Is Trustworthy?</th>
-							<th scope="col">Action</th>
-						</tr>
-					</thead>
-					<tbody>
-                    {
-                        this.state.hole.readings.map(reading=>{
-							
-							var field_reading_depth = "reading_depth["+reading.id+"]"
-							var field_reading_dip = "reading_dip["+reading.id+"]"
-							var field_reading_azimuth = "reading_azimuth["+reading.id+"]"
-							
-                            return(
-                                <tr key={reading.id}>
-                                    <td>
-										<input type="text" style={{width : '100px'}}
-											name={field_reading_depth} value={reading.depth}
-											onChange={(e) => 
-												this.setState({ reading_depth: e.target.value })
-											}
-										/>
-									</td>
-                                    <td>
-										<input type="text" style={{width : '100px'}}
-											name={field_reading_dip} value={reading.dip}
-											onChange={(e) => 
-												this.setState({ reading_dip: e.target.value })
-											}
-										/>
-									</td>
-                                    <td>
-										<input type="text" style={{width : '100px'}}
-											name={field_reading_azimuth} value={reading.azimuth}
-											onChange={(e) => 
-												this.setState({ reading_azimuth: e.target.value })
-											}
-										/>
-									</td>
-                                    <td>
-                                        {reading.is_trustworthy=1?("Yes"):("No")}
-                                    </td>
-                                    <td>
-										<a className="btn btn-warning" href="#">Update</a>
-									</td>
-                                </tr>
-                            );
-                        })
-                    }
-					</tbody>
-					</table>
+				<table className="table table-border">
+				<thead>
+					<tr>
+						<th scope="col">Depth</th>
+						<th scope="col">Dip</th>
+						<th scope="col">Azimuth</th>
+						<th scope="col">Is Trustworthy?</th>
+						<th scope="col">Action</th>
+					</tr>
+				</thead>
+				<tbody>
+				{
+					this.state.hole.readings.map(reading=>{
+						return(
+							<tr key={reading.id}>
+								<td>{reading.depth}</td>
+								<td>{reading.dip}</td>
+								<td>{reading.azimuth}</td>
+								<td>
+									{reading.is_trustworthy=1?("Yes"):("No")}
+								</td>
+								<td>
+									<Link to={"/mineral_exploration/readings/update/" + reading.id}>
+											<button type="submit" className="btn btn-warning">Override</button>
+										</Link>
+								</td>
+							</tr>
+						);
+					})
+				}
+				</tbody>
+				</table>
 				</div>
 
                 <Switch>
-                    <Route exact path="/mineral_exploration/readings/edit/:readingId" component={ReadingUpdate} />
+                    <Route exact path="/mineral_exploration/readings/update/:readingId" component={ReadingUpdate} />
                 </Switch>
 
             </div>
