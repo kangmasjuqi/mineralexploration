@@ -24,9 +24,9 @@ export default class ReadingUpdate extends Component {
         }
     }
 
-    componentDidMount()
+    retrieveData()
     {
-		var readingId = 11 // this.props.match.params.id
+		var readingId = this.props.match.params.readingId
 		axios.get(Config.getUrl()+"/readings/" + readingId)
         .then(response=>{
             this.setState({
@@ -37,8 +37,17 @@ export default class ReadingUpdate extends Component {
 				reading_azimuth: response.data.data.azimuth,
 				reading_is_trustworthy : response.data.data.is_trustworthy,
 			});
-			console.log(this.state.reading)
         });
+    }
+
+    componentDidMount()
+    {
+		this.retrieveData()
+    }
+
+    componentDidUpdate()
+    {
+		this.retrieveData()
     }
 
     updateReading(e)
@@ -54,16 +63,15 @@ export default class ReadingUpdate extends Component {
             dip: this.state.reading_dip,
             azimuth: this.state.reading_azimuth,
         }
-		console.log(this.state)
-		console.log(updated_reading)
-        // axios.patch(Config.getUrl()+"/readings/"+reading_id, updated_reading)
-        // .then(res=>{
-			// console.log(res)
-            // this.setState({alert_message:'success'});
-        // }).catch(error=>{
-			// console.log(error)
-            // this.setState({alert_message:'error'});
-        // });
+		// console.log(updated_reading)
+        axios.patch(Config.getUrl()+"/readings/"+reading_id, updated_reading)
+        .then(res=>{
+			console.log(res)
+            this.setState({alert_message:'success'});
+        }).catch(error=>{
+			console.log(error)
+            this.setState({alert_message:'error'});
+        });
     }
 
 
@@ -71,11 +79,18 @@ export default class ReadingUpdate extends Component {
         return (
             <div>
                 <hr />
-				
+
+				<h5>Override Reading Data</h5>
+
                 {this.state.alert_message=="success"?<Alert type="success" msg="Data updated successfully!" />:null}
                 {this.state.alert_message=="error"?<Alert type="warning" msg="Error occured" />:null}
 
 				<form onSubmit={this.updateReading}>
+				
+					<div style={{width : '100px', float : 'left', marginLeft : '20px'}}>
+						<label>Reading ID</label>
+						<p>{this.state.reading_id}</p>
+					</div>
 
 					<div style={{width : '100px', float : 'left', marginLeft : '20px'}}>
 						<label>Depth</label>
@@ -108,7 +123,7 @@ export default class ReadingUpdate extends Component {
 					</div>
 
 					<div style={{width : '100px', float : 'left', marginLeft : '20px'}}>
-						<button style={{marginTop: '30px'}} type="submit" className="btn btn-primary">Submit</button>
+						<button style={{marginTop: '30px'}} type="submit" className="btn btn-primary">Save</button>
 					</div>
 
 				</form>

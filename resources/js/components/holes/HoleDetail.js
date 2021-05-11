@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import { Link, Route, Switch } from "react-router-dom";
+import { Link, Route, Switch, useParams } from "react-router-dom";
 import Config from '../Config.js';
 import Alert from '../Alert.js';
 import ReadingUpdate from '../readings/ReadingUpdate';
@@ -14,6 +14,7 @@ export default class HoleDetail extends Component {
         
         this.state={
             hole : { 
+				id: 0, 
 				latitude: '', 
 				longitude: '', 
 				dip: '', 
@@ -23,13 +24,14 @@ export default class HoleDetail extends Component {
         }
     }
 
-    componentDidMount()
-    {
-		var holeId = 1 // this.props.match.params.id
+	retrieveData()
+	{
+		var holeId = this.props.match.params.holeId
 		axios.get(Config.getUrl()+"/holes/" + holeId)
         .then(response=>{
             this.setState({
 				hole : { 
+					id: response.data.data.id,
 					latitude: response.data.data.latitude,
 					longitude: response.data.data.longitude,
 					dip: response.data.data.dip,
@@ -38,6 +40,16 @@ export default class HoleDetail extends Component {
 				}
 			});
         });
+	}
+
+    componentDidMount()
+    {
+		this.retrieveData()
+    }
+
+    componentDidUpdate()
+    {
+		this.retrieveData()
     }
 
     render() {
@@ -46,15 +58,24 @@ export default class HoleDetail extends Component {
                 <hr />
                 <h5>Hole Detail & Readings</h5>
                 <div style={{padding : '15px'}}>
-					<p>Latitude : {this.state.hole.latitude}</p>
-					<p>Longitude : {this.state.hole.longitude}</p>
-					<p>Dip : {this.state.hole.dip}</p>
-					<p>Azimuth : {this.state.hole.azimuth}</p>
+					<table className="table table-border">
+						<tbody>
+							<tr>
+								<td>ID : {this.state.hole.id}</td>
+								<td>Lat & Long : {this.state.hole.latitude}, {this.state.hole.longitude}</td>
+							</tr>
+							<tr>
+								<td>Dip : {this.state.hole.dip}</td>
+								<td>Azimuth : {this.state.hole.azimuth}</td>
+							</tr>
+						</tbody>
+					</table>
                 </div>
 				<div>
 				<table className="table table-border">
 				<thead>
 					<tr>
+						<th scope="col">Hole ID</th>
 						<th scope="col">Depth</th>
 						<th scope="col">Dip</th>
 						<th scope="col">Azimuth</th>
@@ -67,6 +88,7 @@ export default class HoleDetail extends Component {
 					this.state.hole.readings.map(reading=>{
 						return(
 							<tr key={reading.id}>
+								<td>{this.state.hole.id}</td>
 								<td>{reading.depth}</td>
 								<td>{reading.dip}</td>
 								<td>{reading.azimuth}</td>
