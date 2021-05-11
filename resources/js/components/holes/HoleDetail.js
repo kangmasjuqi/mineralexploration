@@ -86,6 +86,11 @@ export default class HoleDetail extends Component {
 				<tbody>
 				{
 					this.state.hole.readings.map(reading=>{
+						
+						let link = <Link to={"/mineral_exploration/readings/update/" + reading.id}>
+										<button type="submit" className="btn btn-warning">Override</button>
+									</Link>
+						
 						return(
 							<tr key={reading.id}>
 								<td>{this.state.hole.id}</td>
@@ -93,12 +98,10 @@ export default class HoleDetail extends Component {
 								<td>{reading.dip}</td>
 								<td>{reading.azimuth}</td>
 								<td>
-									{reading.is_trustworthy=1?("Yes"):("No")}
+									{reading.is_trustworthy==1?("Yes"):("No")}
 								</td>
 								<td>
-									<Link to={"/mineral_exploration/readings/update/" + reading.id}>
-											<button type="submit" className="btn btn-warning">Override</button>
-										</Link>
+									{reading.is_trustworthy==0?link:''}
 								</td>
 							</tr>
 						);
