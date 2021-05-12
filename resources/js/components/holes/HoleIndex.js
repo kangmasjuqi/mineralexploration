@@ -29,7 +29,19 @@ export default class HoleIndex extends Component {
         });
     }
 
+	componentWillUnmount() {
+		// fix Warning: Can't perform a React state update on an unmounted component
+		this.setState = (state,callback)=>{
+			return;
+		};
+	}
+
     render() {
+
+		if (!this.state || !this.state.holes) {
+			return <p>Loading holes data...</p>;
+		}
+
         return (
             <div>
                 {this.state.alert_message=="success"?<Alert type="success" msg="Data deleted successfully!" />:null}

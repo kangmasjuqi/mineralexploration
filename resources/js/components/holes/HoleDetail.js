@@ -47,12 +47,24 @@ export default class HoleDetail extends Component {
 		this.retrieveData()
     }
 
+	componentWillUnmount() {
+		// fix Warning: Can't perform a React state update on an unmounted component
+		this.setState = (state,callback)=>{
+			return;
+		};
+	}
+
     componentDidUpdate()
     {
 		this.retrieveData()
     }
 
     render() {
+
+		if (!this.state || !this.state.hole) {
+			return <p>Loading hole detail...</p>;
+		}
+
         return (
             <div>
                 <hr />

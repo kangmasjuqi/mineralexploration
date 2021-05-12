@@ -1,4 +1,4 @@
-import React, { Component, seState, useEffect } from 'react';
+import React, { Component, useState, seState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import { Link } from "react-router-dom";
@@ -11,7 +11,8 @@ export default class ReadingUpdate extends Component {
     {
         super(props);
 
-        this.updateReading = this.updateReading.bind(this);
+        this.updateReading = this.updateReading.bind(this)
+		this.handleChange = this.handleChange.bind(this)
         
         this.state={
 			reading_id: 0, 
@@ -45,6 +46,13 @@ export default class ReadingUpdate extends Component {
 		this.retrieveData()
     }
 
+	componentWillUnmount() {
+		// fix Warning: Can't perform a React state update on an unmounted component
+		this.setState = (state,callback)=>{
+			return;
+		};
+	}
+
     componentDidUpdate()
     {
 		this.retrieveData()
@@ -53,29 +61,48 @@ export default class ReadingUpdate extends Component {
     updateReading(e)
     {
         e.preventDefault();
-		
+
 		var reading_id = this.state.reading_id
-		var hole_id = this.state.reading_hole_id
-		
+
         const updated_reading ={
-            hole_id: hole_id,
+            hole_id: this.state.reading_hole_id,
             depth: this.state.reading_depth,
             dip: this.state.reading_dip,
             azimuth: this.state.reading_azimuth,
         }
-		// console.log(updated_reading)
-        axios.patch(Config.getUrl()+"/readings/"+reading_id, updated_reading)
-        .then(res=>{
-			console.log(res)
-            this.setState({alert_message:'success'});
-        }).catch(error=>{
-			console.log(error)
-            this.setState({alert_message:'error'});
-        });
+
+		console.log(updated_reading)
+
+		// axios.patch(Config.getUrl()+"/readings/"+reading_id, updated_reading)
+		// .then(res=>{
+			// console.log(res)
+			// this.setState({alert_message:'success'});
+			// var that = this;
+			// setTimeout(function() {
+				// that.props.history.push("/mineral_exploration/holes/"+that.state.reading_hole_id);
+			// }, 1000);
+		// }).catch(error=>{
+			// console.log(error)
+			// this.setState({alert_message:'error'});
+		// });
     }
 
+	handleChange(e) {
+		console.log("state before change " + this.state.reading_depth);
+		console.log("input " + e.target.value);
+		this.setState({
+			...this.state,
+			reading_depth: e.target.value,
+		});
+		console.log("state after change " + this.state.reading_depth);
+	}
 
     render() {
+
+		if (!this.state || !this.state.reading_id) {
+			return <p>Loading edit form...</p>;
+		}
+
         return (
             <div>
                 <hr />
@@ -96,7 +123,7 @@ export default class ReadingUpdate extends Component {
 						<label>Depth</label>
 						<input className="form-control" type="text" 
 							id="field_reading_depth" 
-							value={this.state.reading_depth}
+							defaultValue={this.state.reading_depth}
 							onChange={(e) => 
 								this.setState({ reading_depth: e.target.value })
 							}/>
@@ -106,7 +133,7 @@ export default class ReadingUpdate extends Component {
 						<label>Dip</label>
 						<input className="form-control" type="text" 
 							id="field_reading_dip" 
-							value={this.state.reading_dip}
+							defaultValue={this.state.reading_dip}
 							onChange={(e) => 
 								this.setState({ reading_dip: e.target.value })
 							}/>
@@ -116,7 +143,7 @@ export default class ReadingUpdate extends Component {
 						<label>Azimuth</label>
 						<input className="form-control" type="text" 
 							id="field_reading_azimuth" 
-							value={this.state.reading_azimuth}
+							defaultValue={this.state.reading_azimuth}
 							onChange={(e) => 
 								this.setState({ reading_azimuth: e.target.value })
 							}/>
