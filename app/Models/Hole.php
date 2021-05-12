@@ -60,7 +60,7 @@ class Hole extends Model
 
     public function readings()
     {
-        return $this->hasMany(Reading::class)->orderBy('depth', 'asc')->limit(7);
+        return $this->hasMany(Reading::class)->orderBy('depth', 'asc')->limit(100);
     }
 
 }
