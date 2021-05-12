@@ -1,0 +1,43 @@
+
+## INSTALLATION
+
+### make sure you have composer 
+
+	ll /usr/bin/composer
+
+### install dependency on composer.lock
+
+	sudo composer -vvv install
+
+### install dependency on package.lock
+
+	npm install
+
+	npm run dev
+
+### create your local DB
+
+### adjust .env file with your local DB config
+
+	php artisan migrate
+
+### create dummy data : Holes & Readings
+
+	php artisan db:seed
+
+### run laravel app
+
+	php artisan serve --host=__IP_ADDRESS__
+
+### account credential 
+
+	create your own account, goto __IP_ADDRESS__:8000/register, i.e.: http://192.168.69.6:8000/register and then complete the registration from. use the newly created account to log into the app via __IP_ADDRESS__:8000/login
+
+### WEB URL
+
+	http://__IP_ADDRESS__:8000/home
+
+### API URL 
+
+	http://__IP_ADDRESS__:8000/api/holes
+	http://__IP_ADDRESS__:8000/api/holes/2
