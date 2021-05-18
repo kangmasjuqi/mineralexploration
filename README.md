@@ -85,8 +85,6 @@
 
 - php artisan ui bootstrap --auth
 
-- php artisan ui react
-
 - php artisan make:factory HoleFactory --model=Hole
 
 - php artisan make:factory ReadingFactory --model=Reading
