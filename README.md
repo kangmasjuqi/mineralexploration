@@ -29,6 +29,8 @@
 
 ### npm stuffs
 
+- copy the content of package.json file
+
 - npm install
 
 - npm run dev
