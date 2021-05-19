@@ -16,11 +16,9 @@ class showHoleDetails extends Component {
   }
 
   componentDidMount() {
-    // console.log("Print id: " + this.props.match.params.id);
     axios
       .get('http://192.168.69.6:8000/api/holes/'+this.props.match.params.id)
       .then(res => {
-        // console.log("Print-showHoleDetails-API-response: " + res.data);
         this.setState({
           hole: res.data.data,
           readings: res.data.data.readings,
@@ -41,22 +39,18 @@ class showHoleDetails extends Component {
 	}
 
     const hole = this.state.hole;
-    let HoleItemDetail = <div style={{"width":"420px"}}>
+    let HoleItemDetail = <div className="table-responsive">
       <table className="table table-hover table-dark">
         <tbody>
           <tr>
             <td align="right">Hole Latitude</td>
             <td>{ hole.latitude }</td>
-          </tr>
-          <tr>
             <td align="right">Hole Longitude</td>
             <td>{ hole.longitude }</td>
           </tr>
           <tr>
             <td align="right">Hole Dip</td>
             <td>{ hole.dip }</td>
-          </tr>
-          <tr>
             <td align="right">Hole Azimuth</td>
             <td>{ hole.azimuth }</td>
           </tr>
@@ -100,10 +94,9 @@ class showHoleDetails extends Component {
           <div>
             { HoleItemDetail }
           </div>
-          <div>
-			
-			<p>Reading Number : {readings.length}</p>
-		  
+
+          <div className="ReadingListContainer">
+			<p>Reading Number : <span className="badge badge-info">{readings.length}</span></p>
 		    <table className="table table-hover table-striped">
 			  <thead className="thead-dark">
 				  <tr>
