@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import '../../App.css';
 import axios from 'axios';
 import Breadcrumb from '../Breadcrumb';
+import ReadingRow from '../Reading/ReadingRow';
 
 class showHoleDetails extends Component {
   constructor(props) {
@@ -40,36 +41,37 @@ class showHoleDetails extends Component {
 	}
 
     const hole = this.state.hole;
-    let HoleItemDetail = <div>
+    let HoleItemDetail = <div style={{"width":"420px"}}>
       <table className="table table-hover table-dark">
         <tbody>
           <tr>
-            <th scope="row">1</th>
-            <td>Latitude</td>
+            <td align="right">Hole Latitude</td>
             <td>{ hole.latitude }</td>
           </tr>
           <tr>
-            <th scope="row">2</th>
-            <td>Longitude</td>
+            <td align="right">Hole Longitude</td>
             <td>{ hole.longitude }</td>
           </tr>
           <tr>
-            <th scope="row">3</th>
-            <td>Dip</td>
+            <td align="right">Hole Dip</td>
             <td>{ hole.dip }</td>
           </tr>
           <tr>
-            <th scope="row">4</th>
-            <td>Azimuth</td>
+            <td align="right">Hole Azimuth</td>
             <td>{ hole.azimuth }</td>
           </tr>
         </tbody>
       </table>
     </div>
 
-	let ReadingList = <div>
-		Reading List : {this.state.readings.length}
-	  </div>
+
+	const readings = this.state.readings;
+	let readingList;
+	let no =1;
+
+	readingList = readings.map((reading, k) =>
+		<ReadingRow reading={reading} key={k} no={no++}/>
+	);
 
 	let breadcrumb_links_data = [
 		{'label':'Home /', 'url':'/'}, 
@@ -99,7 +101,24 @@ class showHoleDetails extends Component {
             { HoleItemDetail }
           </div>
           <div>
-            { ReadingList }
+			
+			<p>Reading Number : {readings.length}</p>
+		  
+		    <table className="table table-hover table-striped">
+			  <thead className="thead-dark">
+				  <tr>
+					<td>No.</td>
+					<td>Depth</td>
+					<td>Dip</td>
+					<td>Azimuth</td>
+					<td>Trustworthy</td>
+					<td>Action</td>
+				  </tr>
+			  </thead>
+			  <tbody>
+				{ readingList }
+			  </tbody>
+		    </table>
           </div>
 
         </div>

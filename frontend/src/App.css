@@ -75,16 +75,12 @@
   grid-gap: 2em;
 }
 
-.card-container {
-  width: 250px;
+.desc {
+  height:300px;
+  padding: 10px;
   border: 1px solid rgba(0,0,.125);
   border-radius: 5px;
   overflow: hidden;
-}
-
-.desc {
-  height: 240px;
-  padding: 10px;
 }
 
 .desc h2 {

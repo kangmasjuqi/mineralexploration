@@ -34,9 +34,9 @@ class ShowHoleList extends Component {
     let holeList;
 
     if (this.state.loading) {
-      holeList = <div><b>Loading...</b></div>;
+      holeList = <div className="col-md-12"><b>Loading...</b></div>;
     } else if(!holes) {
-      holeList = "there is no hole record!";
+      holeList = <div className="col-md-12"><b>There is no hole record!</b></div>;
     } else {
       holeList = holes.map((hole, k) =>
         <HoleCard hole={hole} key={k} />
@@ -61,8 +61,8 @@ class ShowHoleList extends Component {
             </div>
           </div>
 
-          <div className="list">
-                {holeList}
+          <div className="row">
+			{holeList}
           </div>
 
         </div>

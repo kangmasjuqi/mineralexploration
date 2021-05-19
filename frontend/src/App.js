@@ -7,6 +7,7 @@ import Sidebar from './components/Sidebar';
 import Footer from './components/Footer';
 import ShowHoleList from './components/Hole/ShowHoleList';
 import ShowHoleDetails from './components/Hole/ShowHoleDetails';
+import ReadingUpdate from './components/Reading/ReadingUpdate';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
 				  <Route exact path='/' component={Home} />
 				  <Route exact path='/hole' component={ShowHoleList} />
 				  <Route path='/hole/show-hole/:id' component={ShowHoleDetails} />
+				  <Route path='/reading/override/:id' component={ReadingUpdate} />
 				</div>
 			  </div>
 

@@ -17,7 +17,7 @@ class Sidebar extends Component {
 		<ul className="Sidebar-menu">
 			<li>
 			  <Link to="/hole" style={{display: "block"}}>
-				Hole
+				<i className="fa fa-tags"></i> Hole
 			  </Link>
 			</li>
 		</ul>
