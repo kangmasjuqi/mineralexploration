@@ -112,6 +112,7 @@ class HoleAPIController extends AppBaseController
 				$rule_b = (abs($r->dip - $avg_prev_5_dip) <=3 );
 			}else {
 				$rule_b = true;
+				$avg_prev_5_dip = $r->dip;
 			}
 
 			$is_trustworthy = ($rule_a && $rule_b)===true? 1: 0;
