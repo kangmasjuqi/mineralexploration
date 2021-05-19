@@ -96,7 +96,9 @@ class showHoleDetails extends Component {
           </div>
 
           <div className="ReadingListContainer">
-			<p>Reading Number : <span className="badge badge-info">{readings.length}</span></p>
+			<h4>
+				Reading List | <span className="badge badge-info">{readings.length}</span>
+			</h4>
 		    <table className="table table-hover table-striped">
 			  <thead className="thead-dark">
 				  <tr>

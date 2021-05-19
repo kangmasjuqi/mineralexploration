@@ -8,9 +8,13 @@ const ReadingRow = (props) => {
 
 	let is_trustworthy = "No"
 	let badge_style = "danger"
+	let action_btn = <Link to={`/reading/override/${reading.id}`} className="btn btn-warning">
+					  Override
+				  </Link>
 	if(reading.is_trustworthy === 1){
 		is_trustworthy = "Yes"
 		badge_style = "success"
+		action_btn = ''
 	}
 
     return(
@@ -23,9 +27,7 @@ const ReadingRow = (props) => {
 				<span className={`badge badge-${badge_style}`}>{is_trustworthy}</span>
 			</td>
 			<td>
-				  <Link to={`/reading/override/${reading.id}`} className="btn btn-warning">
-					  Override
-				  </Link>
+				{action_btn}
 			</td>
         </tr>
     )

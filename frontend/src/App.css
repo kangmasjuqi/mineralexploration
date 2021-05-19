@@ -77,19 +77,14 @@
 
 .desc {
   height:300px;
-  padding: 10px;
+  padding: 20px;
   border: 1px solid rgba(0,0,.125);
   border-radius: 5px;
   overflow: hidden;
 }
 
 .desc h2 {
-  font-size: 1em;
   font-weight: 400;
-}
-
-.desc h3, p {
-  font-weight: 300;
 }
 
 .desc h3 {

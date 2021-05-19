@@ -55,13 +55,9 @@ class ShowHoleList extends Component {
 		<Breadcrumb links={breadcrumb_links_data}/>
 
         <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <h4>Holes List</h4>
-            </div>
-          </div>
 
           <div className="row">
+			<br/>
 			{holeList}
           </div>
 
