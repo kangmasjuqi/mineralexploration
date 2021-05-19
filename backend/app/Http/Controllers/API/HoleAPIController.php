@@ -79,8 +79,72 @@ class HoleAPIController extends AppBaseController
             return $this->sendError('Hole not found');
         }
 
-        return $this->sendResponse(new HoleResource($hole), 'Hole retrieved successfully');
+		$holeResource = new HoleResource($hole);
+
+		$holeResource = $this->get_list_reading($holeResource);
+
+        return $this->sendResponse($holeResource, 'Hole retrieved successfully');
     }
+
+	private function get_list_reading($holeResource)
+	{
+
+		// 
+		// For each depth reading, indicate whether it is trustworthy or not using these rules:
+		// a. The azimuth is within 5 degrees of the previous depth's azimuth reading.
+		// b. The dip is within 3 degrees of the average dip from the previous 5 depth readings.
+		// 
+
+		$result = [];
+		$readings = $holeResource->readings;
+		$prev_azimuth = 0;
+		$prev_5_dip = [];
+		$ii = 1;
+		foreach($readings as $r){
+
+			$rule_a = ($ii==1) || (abs($r->azimuth - $prev_azimuth) <=5 );
+
+			if($ii > 1){
+				$a = array_filter($prev_5_dip);
+				if(count($a)) {
+					$avg_prev_5_dip = array_sum($a)/count($a);
+				}
+				$rule_b = (abs($r->dip - $avg_prev_5_dip) <=3 );
+			}else {
+				$rule_b = true;
+			}
+
+			$is_trustworthy = ($rule_a && $rule_b)===true? 1: 0;
+
+			$result[] = array(
+                "id" => $r->id,
+                "hole_id" => $r->hole_id,
+                "depth" => $r->depth,
+                "dip" => $r->dip,
+                "azimuth" => $r->azimuth,
+                "is_trustworthy" => $is_trustworthy,
+			);
+
+			$prev_azimuth = $r->azimuth;
+			$prev_5_dip[] = $r->dip;
+			
+			if(count($prev_5_dip) > 5){
+				// Deleting first array item
+				$removed = array_shift($prev_5_dip);
+			}
+
+			$ii++;
+		}
+		
+        return [
+            'id' => $holeResource->id,
+            'latitude' => $holeResource->latitude,
+            'longitude' => $holeResource->longitude,
+            'dip' => $holeResource->dip,
+            'azimuth' => $holeResource->azimuth,
+            'readings' => $result
+        ];
+	}
 
     /**
      * Update the specified Hole in storage.

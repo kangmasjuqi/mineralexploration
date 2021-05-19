@@ -1,4 +1,4 @@
-import React, { Component, useState, seState, useEffect } from 'react';
+import React, { Component, useState, setState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import { Link } from "react-router-dom";
@@ -87,15 +87,31 @@ export default class ReadingUpdate extends Component {
 		// });
     }
 
-	handleChange(e) {
-		console.log("state before change " + this.state.reading_depth);
-		console.log("input " + e.target.value);
-		this.setState({
-			...this.state,
-			reading_depth: e.target.value,
+	// handleChange(e) {
+		// console.log("state before change " + this.state.reading_depth);
+		// console.log("input " + e.target.value);
+		// this.setState({
+			// ...this.state,
+			// reading_depth: e.target.value,
+		// });
+		// console.log("state after change " + this.state.reading_depth);
+	// }
+
+	// handleChange = (e) => {
+		// this.setState({reading_depth: e.target.value});
+	// }
+
+	handleChange = (reading_depth) => {
+		this.setState({ reading_depth }, () => {
+			this.props.callback(this.state.reading_depth); // Updated value
 		});
-		console.log("state after change " + this.state.reading_depth);
-	}
+	};
+
+	// handleChange(e) {
+		// this.setState({
+			// reading_hole_depth: e.target.value,
+		// });
+	// }
 
     render() {
 
@@ -122,17 +138,18 @@ export default class ReadingUpdate extends Component {
 					<div style={{width : '100px', float : 'left', marginLeft : '20px'}}>
 						<label>Depth</label>
 						<input className="form-control" type="text" 
-							id="field_reading_depth" 
+							id="reading_depth" 
+							name="reading_depth" 
 							defaultValue={this.state.reading_depth}
-							onChange={(e) => 
-								this.setState({ reading_depth: e.target.value })
-							}/>
+							onChange={this.handleChange}/>
+						-- {this.state.reading_depth} --
 					</div>
 
 					<div style={{width : '100px', float : 'left', marginLeft : '20px'}}>
 						<label>Dip</label>
 						<input className="form-control" type="text" 
-							id="field_reading_dip" 
+							id="reading_dip" 
+							name="reading_dip" 
 							defaultValue={this.state.reading_dip}
 							onChange={(e) => 
 								this.setState({ reading_dip: e.target.value })
@@ -142,7 +159,8 @@ export default class ReadingUpdate extends Component {
 					<div style={{width : '100px', float : 'left', marginLeft : '20px'}}>
 						<label>Azimuth</label>
 						<input className="form-control" type="text" 
-							id="field_reading_azimuth" 
+							id="reading_azimuth" 
+							name="reading_azimuth" 
 							defaultValue={this.state.reading_azimuth}
 							onChange={(e) => 
 								this.setState({ reading_azimuth: e.target.value })
