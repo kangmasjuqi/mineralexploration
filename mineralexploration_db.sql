@@ -34,9 +34,9 @@ CREATE TABLE `holes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `holes` (`id`, `latitude`, `longitude`, `dip`, `azimuth`, `created_at`, `updated_at`) VALUES
-(1,	'23.40449',	'31.1338362',	39.47,	138.00,	'2021-04-24 07:45:30',	'2021-04-24 07:45:30'),
-(2,	'24.1676',	'61.8340691',	15.80,	28.00,	'2021-04-24 07:45:31',	'2021-04-24 07:45:31'),
-(3,	'40.0411178',	'40.1148',	52.39,	188.00,	'2021-04-24 07:45:31',	'2021-04-24 07:45:31');
+(1,	'23.40449',	'31.1338362',	30.00,	10.00,	'2021-04-24 07:45:30',	'2021-04-24 07:45:30'),
+(2,	'24.1676',	'61.8340691',	31.00,	11.00,	'2021-04-24 07:45:31',	'2021-04-24 07:45:31'),
+(3,	'40.0411178',	'40.1148',	33.00,	15.00,	'2021-04-24 07:45:31',	'2021-04-24 07:45:31');
 
 DROP TABLE IF EXISTS `migrations`;
 CREATE TABLE `migrations` (
@@ -396,4 +396,4 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1,	'marjuqi',	'marjuqi.rahmat@gmail.com',	NULL,	'$2y$10$2jVSioTdVz1vRMxuSvXt6OgfQWrGV06Bm4bAydavGBH4UEDMEvB7G',	NULL,	'2021-04-24 07:18:13',	'2021-04-24 07:18:13');
 
--- 2021-05-17 17:14:42
+-- 2021-05-17 17:42:25
