@@ -1,7 +1,7 @@
 @media only screen and (min-width: 1200px) {
-	.container {
-		max-width: 1280px;
-	}
+    .container {
+        max-width: 1280px;
+    }
 }
 
 .App {
@@ -93,54 +93,68 @@
   padding: 10px 0 10px 0;
 }
 
-.Sidebar{
-	color: white;
+.sidebar{
+    color: white;
 }
 
-.Sidebar-menu{
+.sidebar-menu{
     padding: 10px;
     text-transform: uppercase;
     font-weight: bold;
     list-style: none;
 }
 
-.Sidebar-menu li{
-	background: #def;
+.sidebar-menu li{
+    background: #def;
     border-radius: 3px;
-	padding:10px;
-	margin:5px 0px;
+    padding:10px;
+    margin:5px 0px;
+}
+
+.sidebar-menu li a{
+    display:block;
 }
 
 p.breadcrumb{
-	margin-top:10px;
+    margin-top:10px;
 }
 
 p.breadcrumb span{
-	margin:0px 5px 0px 0px;
+    margin:0px 5px 0px 0px;
 }
 
 p.breadcrumb span:last-child a{
-	color:#333;
+    color:#333;
 }
 
 div.ReadingListContainer{
-	overflow-y: scroll;
+    overflow-y: scroll;
     height: 480px;
 }
 
 p.trustworthy_rule_check{
-	font-size: 12px;
+    font-size: 12px;
     color: red;
     background: #fdd;
     padding: 5px;
     margin-top: 5px;
-	width: 180px;
+    width: 180px;
 }
 
-.Footer{
-	background: #555;
-	color: white;
-	height: 80px;
-	margin: 10px 0px;
-	padding: 20px;
+p.loading-notif{
+    font-size: 13px;
+    font-weight: bold;
+    color: orange;
+    background: #ffa;
+    padding: 10px;
+    margin-top: 5px;
+    width: 240px;
+}
+
+.footer{
+    background: #555;
+    color: white;
+    height: 80px;
+    margin: 10px 0px;
+    padding: 20px;
 }
