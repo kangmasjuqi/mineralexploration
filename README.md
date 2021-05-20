@@ -40,33 +40,33 @@ Develop a web app using HTML, CSS, JavaScript (preferably ReactJS), and any back
 
 - First of all, adjust your config on .ENV file for below items:
 
-	DB_CONNECTION=
-	DB_HOST=
-	DB_PORT=
-	DB_DATABASE=
-	DB_USERNAME=
-	DB_PASSWORD=
+		DB_CONNECTION=
+		DB_HOST=
+		DB_PORT=
+		DB_DATABASE=
+		DB_USERNAME=
+		DB_PASSWORD=
 
 - Dependencies setup 
 
-	cd backend
-	composer install
-	npm install
+		cd backend
+		composer install
+		npm install
 
 - Run the Laravel App 
 
-	php artisan serve --host=_____YOUR_IP_ADDRESS_____
+		php artisan serve --host=_____YOUR_IP_ADDRESS_____
 
 ### Frontend setup
 
 - First of all, adjust API_URL on Config.js file to point to your local API???
 
-	cd frontend
-	npm install
+		cd frontend
+		npm install
 
 - Run the React App 
 
-	npm start
+		npm start
 
 ### Demo
 
