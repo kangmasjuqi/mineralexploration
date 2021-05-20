@@ -38,7 +38,11 @@ class ReadingUpdate extends Component {
   };
   
   onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState(
+		{ 
+			[e.target.name]: e.target.value.replace(/[^0-9\.]/g, '') 
+		}
+	);
   };
 
   onSubmit = e => {

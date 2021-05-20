@@ -83,7 +83,7 @@ class showHoleDetails extends Component {
             <div className="col-md-12">
               <h4>View Hole's Info&nbsp;&nbsp;
 				  <Link to="/hole" className="btn btn-primary float-right">
-					  Show List
+					  Show Hole List
 				  </Link>
 			  </h4><br/>
             </div>
