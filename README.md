@@ -1,116 +1,64 @@
+## Background & The Challenge
 
-## INSTALLATION
+	Survey instruments are used by mineral exploration clients to measure the physical location of a drilled
+	hole and see how close the actual end of the hole is to the planned underground target mineral body.
+	You need to provide a way for geologists to view the following readings coming from a survey
+	instrument:
+	• A single collar position (latitude, longitude, dip and azimuth) which is the surface position and orientation
+	of the drill hole.
+	• A number of depth readings. Each reading has depth, dip and azimuth providing the direction of the hole
+	at that point.
 
-### make sure you have composer 
+	Develop a web app using HTML, CSS, JavaScript (preferably ReactJS), and any back-end framework
+	(preferably PHP Laravel) that allows a user to perform the following:
+	• Select an existing drill hole from a list.
+	• View the collar position and depth readings for that drill hole.
+	• Override any depth reading as being incorrect or not.
 
-- ll /usr/bin/composer
+## Application SETUP
 
-- sudo composer -vvv create-project laravel/laravel="8.0.*" mineralexploration
+### Source Code Retrieval
 
-- sudo chown -R marjuqi:marjuqi mineralexploration/
+	Repo : https://github.com/kangmasjuqi/mineralexploration
+	Branch : laravel-with-react-separated-folder
 
-### update composer.json
+### DB setup
 
-    "require": {
-        "php": "^7.3",
-        "fideloper/proxy": "^4.2",
-        "fruitcake/laravel-cors": "^2.0",
-        "guzzlehttp/guzzle": "^7.0.1",
-        "laravel/framework": "^8.0",
-        "laravel/tinker": "^2.0",
-        "doctrine/dbal": "~2.3",
-        "infyomlabs/adminlte-templates": "^2.0",
-        "infyomlabs/laravel-generator": "8.0.x-dev",
-        "laravel/ui": "^3.2",
-        "laravelcollective/html": "^6.2"
-    },
+	import the "mineralexploration_db.sql" into your local DB
 
-- sudo composer -vvv update
+### Backend setup
 
-### npm stuffs
+	cd backend
+	composer install
+	npm install
+	php artisan serve --host=_____YOUR_IP_ADDRESS_____
 
-- copy the content of package.json file
+	configure your DB config on .ENV file for below data:
 
-- npm install
+		DB_CONNECTION=
+		DB_HOST=
+		DB_PORT=
+		DB_DATABASE=
+		DB_USERNAME=
+		DB_PASSWORD=
 
-- npm run dev
+### Frontend setup
 
-### scaffold modules using infyom
+	cd frontend
+	npm install
+	npm start
 
-- php artisan infyom:api_scaffold Hole
+	configure Config.js content to point to your local API URL???
 
-		latitude string text
+### Demo
 
-		required
+	link to LOOM???
 
-		longitude string text
+### Marjuqi-Machine-Snapshot as a Reference
 
-		required
+	MARJUQI-MACHINE-SNAPSHOT.TXT
 
-		dip float text
 
-		required
+## Contact
 
-		azimuth float text
-
-		required
-
-- php artisan infyom:api_scaffold Reading
-
-		hole_id integer:unsigned:foreign,holes,id - `$table->foreign('hole_id')->references('id')->on('holes')` text
-
-		required
-
-		depth float text
-
-		required
-
-		dip float text
-
-		required
-
-		azimuth float text
-
-		required
-
-		is_trustworthy integer text
-
-### create your local DB
-
-### adjust .env file with your local DB config
-
-- php artisan migrate
-
-- php artisan ui bootstrap
-
-- php artisan ui bootstrap --auth
-
-- php artisan make:factory HoleFactory --model=Hole
-
-- php artisan make:factory ReadingFactory --model=Reading
-
-- php artisan db:seed
-
-- php artisan serve --host=__IP_ADDRESS__
-
-### account credential 
-
-goto __IP_ADDRESS__:8000/login, i.e.: http://192.168.69.6:8000/login and use below account ;
-
-	username : marjuqi.rahmat@gmail.com
-
-	password : marjuqi123
-
-or create your own account, goto __IP_ADDRESS__:8000/register, i.e.: http://192.168.69.6:8000/register and then complete the registration from
-
-### WEB URL
-
-	http://__IP_ADDRESS__:8000/home
-
-### API URL 
-
-	http://__IP_ADDRESS__:8000/api/holes
-	http://__IP_ADDRESS__:8000/api/holes/2
-
-==========================================================
-
+	marjuqi[.]rahmat[at]gmail
