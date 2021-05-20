@@ -81,14 +81,15 @@ class HoleAPIController extends AppBaseController
 
 		$holeResource = new HoleResource($hole);
 
-		$holeResource = $this->get_list_reading($holeResource);
+		$holeResource = $this->get_list_reading($holeResource, $hole);
 
         return $this->sendResponse($holeResource, 'Hole retrieved successfully');
     }
 
-	private function get_list_reading($holeResource)
+	private function get_list_reading($holeResource, $hole)
 	{
 
+		// RULES:
 		// 
 		// For each depth reading, indicate whether it is trustworthy or not using these rules:
 		// a. The azimuth is within 5 degrees of the previous depth's azimuth reading.
@@ -97,24 +98,22 @@ class HoleAPIController extends AppBaseController
 
 		$result = [];
 		$readings = $holeResource->readings;
-		$prev_azimuth = 0;
-		$prev_5_dip = [];
+		$prev_azimuth = $hole->azimuth;		// set hole->azimuth as the initial "prev_azimuth"
+		$prev_5_dip = [$hole->dip];			// set hole->dip as the first element of array "prev_5_dip"
 		$ii = 1;
 		foreach($readings as $r){
 
-			$rule_a = ($ii==1) || (abs($r->azimuth - $prev_azimuth) <=5 );
+			// rule a
+				$rule_a = (abs($r->azimuth - $prev_azimuth) <=5 );
 
-			if($ii > 1){
+			// rule b
 				$a = array_filter($prev_5_dip);
 				if(count($a)) {
 					$avg_prev_5_dip = array_sum($a)/count($a);
 				}
 				$rule_b = (abs($r->dip - $avg_prev_5_dip) <=3 );
-			}else {
-				$rule_b = true;
-				$avg_prev_5_dip = $r->dip;
-			}
 
+			// calculate trustworthy based on rule a & rule b
 			$is_trustworthy = ($rule_a && $rule_b)===true? 1: 0;
 
 			$result[] = array(
@@ -134,7 +133,7 @@ class HoleAPIController extends AppBaseController
 			$prev_5_dip[] = $r->dip;
 			
 			if(count($prev_5_dip) > 5){
-				// Deleting first array item
+				// Deleting first array item, keep the recent 5 data
 				$removed = array_shift($prev_5_dip);
 			}
 
