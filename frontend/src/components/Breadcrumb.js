@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import '../App.css';
 import { Link } from 'react-router-dom';
+import '../App.css';
 
 class Breadcrumb extends Component {
+
   constructor(props) {
     super(props);
     this.state = {links_data:props.links};
@@ -10,17 +11,15 @@ class Breadcrumb extends Component {
 
   render() {
 
-    const listItems = this.state.links_data.map((link, key) =>
-	  <span key={key}>
-		  <Link to={link.url}>
-			{link.label}
-		  </Link>
-	  </span>
+    const list_items = this.state.links_data.map((link, key) =>
+      <span key={key}>
+          <Link to={link.url}>
+            {link.label}
+          </Link>
+      </span>
     );
 
-    return (
-		<p className="breadcrumb">{listItems}</p>
-    );
+    return (<p className="breadcrumb">{list_items}</p>);
   }
 }
 

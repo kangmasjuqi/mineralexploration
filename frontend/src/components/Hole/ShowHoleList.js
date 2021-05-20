@@ -1,17 +1,27 @@
 import React, { Component } from 'react';
-import '../../App.css';
 import axios from 'axios';
+import ConfigData from "../../Config.json";
+
 import HoleCard from './HoleCard';
 import Breadcrumb from '../Breadcrumb';
-import configData from "../../Config.json";
+import Loading from "../Loading";
+import NotFound from "../NotFound";
+
+import '../../App.css';
 
 class ShowHoleList extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
-      api_url: configData.API_URL,
-      holes: [],
+      api_url: ConfigData.API_URL,
       loading: true,
+      breadcrumb_links_data: [
+        {'label':'Home /', 'url':'/'}, 
+        {'label':'Hole /', 'url':'/hole'}, 
+        {'label':'List', 'url':'#'}
+      ],
+      holes: [],
     };
   }
 
@@ -33,34 +43,29 @@ class ShowHoleList extends Component {
   render() {
 
     const holes = this.state.holes;
-    let holeList;
+    let hole_list;
 
-    if (this.state.loading) {
-      holeList = <div className="col-md-12"><b>Loading...</b></div>;
-    } else if(!holes) {
-      holeList = <div className="col-md-12"><b>There is no hole record!</b></div>;
+    if(!holes) {
+      hole_list = <NotFound />
     } else {
-      holeList = holes.map((hole, k) =>
+      hole_list = holes.map((hole, k) =>
         <HoleCard hole={hole} key={k} />
       );
     }
 
-	let breadcrumb_links_data = [
-		{'label':'Home /', 'url':'/'}, 
-		{'label':'Hole /', 'url':'/hole'}, 
-		{'label':'List', 'url':'#'}
-	]
-
     return (
       <div className="ShowHoleList">
 
-		<Breadcrumb links={breadcrumb_links_data}/>
+        <Breadcrumb links={this.state.breadcrumb_links_data}/>
 
         <div className="container">
 
           <div className="row">
-			<br/>
-			{holeList}
+
+            <Loading loading={this.state.loading} />
+
+            {hole_list}
+
           </div>
 
         </div>

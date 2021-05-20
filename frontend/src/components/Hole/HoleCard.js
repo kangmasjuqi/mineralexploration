@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 import '../../App.css';
 
 const HoleCard = (props) => {
+
     const  hole  = props.hole;
+
     return(
-		<div className="col-md-4 col-sm-6 col-xs-12">
+        <div className="col-md-4 col-sm-6 col-xs-12">
             <div className="desc">
                 <h2>
                     <Link to={`/hole/show-hole/${hole.id}`}>
@@ -22,7 +24,7 @@ const HoleCard = (props) => {
                     </Link>
                 </div>
             </div>
-		</div>
+        </div>
     )
 };
 

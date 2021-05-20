@@ -1,26 +1,20 @@
 import React, { Component } from 'react';
-import '../App.css';
 import { Link } from 'react-router-dom';
+import '../App.css';
 
 class Sidebar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  componentDidMount() {};
 
   render() {
 
     return (
-      <div className="Sidebar">
-		<ul className="Sidebar-menu">
-			<li>
-			  <Link to="/hole" style={{display: "block"}}>
-				<i className="fa fa-tags"></i> Hole
-			  </Link>
-			</li>
-		</ul>
+      <div className="sidebar">
+        <ul className="sidebar-menu">
+            <li>
+              <Link to="/hole">
+                <i className="fa fa-tags"></i> Hole
+              </Link>
+            </li>
+        </ul>
       </div>
     );
   }
