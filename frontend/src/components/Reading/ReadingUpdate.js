@@ -59,7 +59,7 @@ class ReadingUpdate extends Component {
       .patch('http://192.168.69.6:8000/api/readings/'+this.props.match.params.id, data)
       .then(res => {
 		this.setState({update_reading_button_label: "Successfully updated!"})
-		setTimeout(() => this.props.history.push('/hole/show-hole/'+this.state.hole_id), 3000);
+		setTimeout(() => this.props.history.push('/hole/show-hole/'+this.state.hole_id), 2000);
       })
       .catch(err => {
         console.log("Error in ReadingUpdate!");

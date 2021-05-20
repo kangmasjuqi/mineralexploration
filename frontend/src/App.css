@@ -128,6 +128,15 @@ div.ReadingListContainer{
     height: 480px;
 }
 
+p.trustworthy_rule_check{
+	font-size: 12px;
+    color: red;
+    background: #fdd;
+    padding: 5px;
+    margin-top: 5px;
+	width: 180px;
+}
+
 .Footer{
 	background: #555;
 	color: white;
