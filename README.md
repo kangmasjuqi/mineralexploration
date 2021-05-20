@@ -59,7 +59,9 @@ Develop a web app using HTML, CSS, JavaScript (preferably ReactJS), and any back
 
 ### Frontend setup
 
-- First of all, adjust API_URL on Config.js file to point to your local API???
+- First of all, adjust `API_URL` on /frontend/src/Config.json file to point to your local API
+
+- Dependencies setup 
 
 		cd frontend
 		npm install
