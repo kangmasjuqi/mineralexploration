@@ -124,6 +124,10 @@ class HoleAPIController extends AppBaseController
                 "dip" => $r->dip,
                 "azimuth" => $r->azimuth,
                 "is_trustworthy" => $is_trustworthy,
+                "is_trustworthy_rule_check" => array(
+					"previous_azimuth" => $prev_azimuth,
+					"average_dip_of_previous_5_depth_readings" => $avg_prev_5_dip,
+				)
 			);
 
 			$prev_azimuth = $r->azimuth;
