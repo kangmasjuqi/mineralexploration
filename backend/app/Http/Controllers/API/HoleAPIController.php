@@ -79,44 +79,44 @@ class HoleAPIController extends AppBaseController
             return $this->sendError('Hole not found');
         }
 
-		$holeResource = new HoleResource($hole);
+        $holeResource = new HoleResource($hole);
 
-		$holeResource = $this->get_list_reading($holeResource, $hole);
+        $holeResource = $this->get_list_reading($holeResource, $hole);
 
         return $this->sendResponse($holeResource, 'Hole retrieved successfully');
     }
 
-	private function get_list_reading($holeResource, $hole)
-	{
+    private function get_list_reading($holeResource, $hole)
+    {
 
-		// RULES:
-		// 
-		// For each depth reading, indicate whether it is trustworthy or not using these rules:
-		// a. The azimuth is within 5 degrees of the previous depth's azimuth reading.
-		// b. The dip is within 3 degrees of the average dip from the previous 5 depth readings.
-		// 
+        // RULES:
+        // 
+        // For each depth reading, indicate whether it is trustworthy or not using these rules:
+        // a. The azimuth is within 5 degrees of the previous depth's azimuth reading.
+        // b. The dip is within 3 degrees of the average dip from the previous 5 depth readings.
+        // 
 
-		$result = [];
-		$readings = $holeResource->readings;
-		$prev_azimuth = $hole->azimuth;		// set hole->azimuth as the initial "prev_azimuth"
-		$prev_5_dip = [$hole->dip];			// set hole->dip as the first element of array "prev_5_dip"
-		$ii = 1;
-		foreach($readings as $r){
+        $result = [];
+        $readings = $holeResource->readings;
+        $prev_azimuth = $hole->azimuth;        // set hole->azimuth as the initial "prev_azimuth"
+        $prev_5_dip = [$hole->dip];            // set hole->dip as the first element of array "prev_5_dip"
+        $ii = 1;
+        foreach($readings as $r){
 
-			// rule a
-				$rule_a = (abs($r->azimuth - $prev_azimuth) <=5 );
+            // rule a
+                $rule_a = (abs($r->azimuth - $prev_azimuth) <=5 );
 
-			// rule b
-				$a = array_filter($prev_5_dip);
-				if(count($a)) {
-					$avg_prev_5_dip = array_sum($a)/count($a);
-				}
-				$rule_b = (abs($r->dip - $avg_prev_5_dip) <=3 );
+            // rule b
+                $a = array_filter($prev_5_dip);
+                if(count($a)) {
+                    $avg_prev_5_dip = array_sum($a)/count($a);
+                }
+                $rule_b = (abs($r->dip - $avg_prev_5_dip) <=3 );
 
-			// calculate trustworthy based on rule a & rule b
-			$is_trustworthy = ($rule_a && $rule_b)===true? 1: 0;
+            // calculate trustworthy based on rule a & rule b
+            $is_trustworthy = ($rule_a && $rule_b)===true? 1: 0;
 
-			$result[] = array(
+            $result[] = array(
                 "id" => $r->id,
                 "hole_id" => $r->hole_id,
                 "depth" => $r->depth,
@@ -124,22 +124,22 @@ class HoleAPIController extends AppBaseController
                 "azimuth" => $r->azimuth,
                 "is_trustworthy" => $is_trustworthy,
                 "is_trustworthy_rule_check" => array(
-					"previous_azimuth" => $prev_azimuth,
-					"average_dip_of_previous_5_depth_readings" => $avg_prev_5_dip,
-				)
-			);
+                    "previous_azimuth" => $prev_azimuth,
+                    "average_dip_of_previous_5_depth_readings" => round($avg_prev_5_dip, 2),
+                )
+            );
 
-			$prev_azimuth = $r->azimuth;
-			$prev_5_dip[] = $r->dip;
-			
-			if(count($prev_5_dip) > 5){
-				// Deleting first array item, keep the recent 5 data
-				$removed = array_shift($prev_5_dip);
-			}
+            $prev_azimuth = $r->azimuth;
+            $prev_5_dip[] = $r->dip;
+            
+            if(count($prev_5_dip) > 5){
+                // Deleting first array item, keep the recent 5 data
+                $removed = array_shift($prev_5_dip);
+            }
 
-			$ii++;
-		}
-		
+            $ii++;
+        }
+        
         return [
             'id' => $holeResource->id,
             'latitude' => $holeResource->latitude,
@@ -148,7 +148,7 @@ class HoleAPIController extends AppBaseController
             'azimuth' => $holeResource->azimuth,
             'readings' => $result
         ];
-	}
+    }
 
     /**
      * Update the specified Hole in storage.
