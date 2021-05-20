@@ -74,7 +74,9 @@ Develop a web app using HTML, CSS, JavaScript (preferably ReactJS), and any back
 
 Below is the link to the DEMO of the app on Marjuqi-Local-Machine
 
-	link to LOOM???
+	https://www.loom.com/share/1cc1366b1e914f3c88c66c78b0223245
+
+https://www.loom.com/share/1cc1366b1e914f3c88c66c78b0223245
 
 ### Marjuqi-Machine-Snapshot
 
