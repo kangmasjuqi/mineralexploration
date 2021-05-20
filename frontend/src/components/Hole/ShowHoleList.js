@@ -3,11 +3,13 @@ import '../../App.css';
 import axios from 'axios';
 import HoleCard from './HoleCard';
 import Breadcrumb from '../Breadcrumb';
+import configData from "../../Config.json";
 
 class ShowHoleList extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      api_url: configData.API_URL,
       holes: [],
       loading: true,
     };
@@ -15,7 +17,7 @@ class ShowHoleList extends Component {
 
   componentDidMount() {
     axios
-      .get('http://192.168.69.6:8000/api/holes')
+      .get(this.state.api_url+'/holes')
       .then(res => {
         this.setState({
           holes: res.data.data,

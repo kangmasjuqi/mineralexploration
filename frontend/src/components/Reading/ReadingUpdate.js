@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import '../../App.css';
 import Breadcrumb from '../Breadcrumb';
+import configData from "../../Config.json";
 
 class ReadingUpdate extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      api_url: configData.API_URL, 
       id: '',
       hole_id: '',
       depth: '',
@@ -20,7 +22,7 @@ class ReadingUpdate extends Component {
 
   componentDidMount() {
     axios
-      .get('http://192.168.69.6:8000/api/readings/'+this.props.match.params.id)
+      .get(this.state.api_url+'/readings/'+this.props.match.params.id)
       .then(res => {
         this.setState({
           id: res.data.data.id,
@@ -60,7 +62,7 @@ class ReadingUpdate extends Component {
     };
 
     axios
-      .patch('http://192.168.69.6:8000/api/readings/'+this.props.match.params.id, data)
+      .patch(this.state.api_url+'/readings/'+this.props.match.params.id, data)
       .then(res => {
 		this.setState({update_reading_button_label: "Successfully updated!"})
 		setTimeout(() => this.props.history.push('/hole/show-hole/'+this.state.hole_id), 2000);
