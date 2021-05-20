@@ -33,7 +33,7 @@
 	npm install
 	php artisan serve --host=_____YOUR_IP_ADDRESS_____
 
-	configure your DB config on .ENV file for below data:
+	adjust your config on .ENV file for below items:
 
 		DB_CONNECTION=
 		DB_HOST=
@@ -44,21 +44,23 @@
 
 ### Frontend setup
 
+First of all, adjust API_URL on Config.js file to point to your local API???
+
 	cd frontend
 	npm install
 	npm start
-
-	configure Config.js content to point to your local API URL???
 
 ### Demo
 
 	link to LOOM???
 
-### Marjuqi-Machine-Snapshot as a Reference
+### Marjuqi-Machine-Snapshot
+
+As a reference, I attached my local machine data to give a snapshot about my local machine configuration
 
 	MARJUQI-MACHINE-SNAPSHOT.TXT
 
 
 ## Contact
 
-	marjuqi[.]rahmat[at]gmail
+	marjuqi[dot]rahmat[at]gmail
