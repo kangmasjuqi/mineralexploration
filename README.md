@@ -1,110 +1,89 @@
+## Intro
 
-## INSTALLATION
+### Background
 
-### make sure you have composer 
+Survey instruments are used by mineral exploration clients to measure the physical location of a drilled
+hole and see how close the actual end of the hole is to the planned underground target mineral body.
+You need to provide a way for geologists to view the following readings coming from a survey
+instrument:
 
-- ll /usr/bin/composer
+- A single collar position (latitude, longitude, dip and azimuth) which is the surface position and orientation
+of the drill hole.
 
-- sudo composer -vvv create-project laravel/laravel="8.0.*" mineralexploration
+- A number of depth readings. Each reading has depth, dip and azimuth providing the direction of the hole
+at that point.
 
-- sudo chown -R marjuqi:marjuqi mineralexploration/
+### The Challenge
 
-### update composer.json
+Develop a web app using HTML, CSS, JavaScript (preferably ReactJS), and any back-end framework
+(preferably PHP Laravel) that allows a user to perform the following:
 
-    "require": {
-        "php": "^7.3",
-        "fideloper/proxy": "^4.2",
-        "fruitcake/laravel-cors": "^2.0",
-        "guzzlehttp/guzzle": "^7.0.1",
-        "laravel/framework": "^8.0",
-        "laravel/tinker": "^2.0",
-        "doctrine/dbal": "~2.3",
-        "infyomlabs/adminlte-templates": "^2.0",
-        "infyomlabs/laravel-generator": "8.0.x-dev",
-        "laravel/ui": "^3.2",
-        "laravelcollective/html": "^6.2"
-    },
+- Select an existing drill hole from a list.
+- View the collar position and depth readings for that drill hole.
+- Override any depth reading as being incorrect or not.
 
-- sudo composer -vvv update
+## Application SETUP
 
-### scaffold modules using infyom
+### Source Code Retrieval
 
-- php artisan infyom:api_scaffold Hole
+- Repo : https://github.com/kangmasjuqi/mineralexploration
 
-		latitude string text
+- Branch : laravel-with-react-separated-folder
 
-		required
+- ZIP version : .......???
 
-		longitude string text
+### DB setup
 
-		required
+- Import the "mineralexploration_db.sql" into your local DB
 
-		dip float text
+### Backend setup
 
-		required
+- First of all, adjust your config on .ENV file for below items:
 
-		azimuth float text
+		DB_CONNECTION=
+		DB_HOST=
+		DB_PORT=
+		DB_DATABASE=
+		DB_USERNAME=
+		DB_PASSWORD=
 
-		required
+- Dependencies setup 
 
-- php artisan infyom:api_scaffold Reading
+		cd backend
+		composer install
+		npm install
 
-		hole_id integer:unsigned:foreign,holes,id - `$table->foreign('hole_id')->references('id')->on('holes')` text
+- Run the Laravel App 
 
-		required
+		php artisan serve --host=_____YOUR_IP_ADDRESS_____
 
-		depth float text
+### Frontend setup
 
-		required
+- First of all, adjust `API_URL` on /frontend/src/Config.json file to point to your local API
 
-		dip float text
+- Dependencies setup 
 
-		required
+		cd frontend
+		npm install
 
-		azimuth float text
+- Run the React App 
 
-		required
+		npm start
 
-		is_trustworthy integer text
+### Demo
 
-### create your local DB
+Below is the link to the DEMO of the app on Marjuqi-Local-Machine
 
-### adjust .env file with your local DB config
+	https://www.loom.com/share/1cc1366b1e914f3c88c66c78b0223245
 
-- php artisan migrate
+https://www.loom.com/share/1cc1366b1e914f3c88c66c78b0223245
 
-- php artisan ui bootstrap
+### Marjuqi-Machine-Snapshot
 
-- php artisan ui bootstrap --auth
+As a reference, I attached my local machine data to give a snapshot about my local machine configuration
 
-- npm install
+	MARJUQI-MACHINE-SNAPSHOT.TXT
 
-- npm run dev
+## Contact
 
-- php artisan make:factory HoleFactory --model=Hole
-
-- php artisan make:factory ReadingFactory --model=Reading
-
-- php artisan db:seed
-
-- php artisan serve --host=__IP_ADDRESS__
-
-### account credential 
-
-goto __IP_ADDRESS__:8000/login, i.e.: http://192.168.69.6:8000/login and use below account ;
-
-	username : marjuqi.rahmat@gmail.com
-
-	password : marjuqi123
-
-or create your own account, goto __IP_ADDRESS__:8000/register, i.e.: http://192.168.69.6:8000/register and then complete the registration from
-
-### WEB URL
-
-	http://__IP_ADDRESS__:8000/home
-
-### API URL 
-
-	http://__IP_ADDRESS__:8000/api/holes
-	http://__IP_ADDRESS__:8000/api/holes/2
-
+	marjuqi[dot]rahmat[at]gmail
